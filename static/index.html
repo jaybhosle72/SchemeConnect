@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SchemeConnect AI - Discover government welfare schemes you're eligible for using AI. Find PM Kisan, Ayushman Bharat, scholarships, and 20+ schemes instantly.">
+    <title>SchemeConnect AI — Find Your Government Schemes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <!-- ============ NAVIGATION ============ -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo" id="nav-logo">
+                <span class="logo-icon">🏛️</span>
+                <span class="logo-text">Scheme<span class="logo-accent">Connect</span> AI</span>
+            </a>
+            <div class="nav-links">
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+                <a href="#find-schemes" class="nav-link">Find Schemes</a>
+                <button class="nav-cta" onclick="scrollToSection('find-schemes')">Get Started →</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ============ HERO SECTION ============ -->
+    <section class="hero" id="hero">
+        <div class="hero-bg-elements">
+            <div class="hero-orb hero-orb-1"></div>
+            <div class="hero-orb hero-orb-2"></div>
+            <div class="hero-orb hero-orb-3"></div>
+            <div class="hero-grid"></div>
+        </div>
+        <div class="hero-container">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                Google Solution Challenge 2026
+            </div>
+            <h1 class="hero-title">
+                Discover Government Schemes
+                <span class="hero-gradient-text">You Deserve</span>
+            </h1>
+            <p class="hero-subtitle">
+                India has <strong>700+ welfare schemes</strong> worth lakhs of rupees — but most citizens don't know which ones they qualify for. 
+                Let AI find your eligible schemes in <strong>30 seconds</strong>.
+            </p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="stat-schemes">22+</span>
+                    <span class="stat-label">Schemes</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number">₹10L+</span>
+                    <span class="stat-label">Potential Benefits</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number">36</span>
+                    <span class="stat-label">States & UTs</span>
+                </div>
+            </div>
+            <div class="hero-actions">
+                <button class="btn-primary btn-lg" onclick="scrollToSection('find-schemes')">
+                    Find My Schemes
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+                <button class="btn-ghost btn-lg" onclick="scrollToSection('how-it-works')">
+                    Learn More
+                </button>
+            </div>
+            <div class="hero-powered">
+                <span>Powered by</span>
+                <span class="powered-google">
+                    <span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC05">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span>
+                </span>
+                <span>Gemini AI</span>
+                <span class="gemini-sparkle">✦</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ HOW IT WORKS ============ -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-badge">Simple Process</span>
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-subtitle">Three simple steps to discover schemes worth lakhs of rupees</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card" style="--delay: 0.1s">
+                    <div class="step-number">01</div>
+                    <div class="step-icon">📝</div>
+                    <h3>Fill Your Profile</h3>
+                    <p>Answer a few simple questions about your age, occupation, income, and state. Takes under 60 seconds.</p>
+                </div>
+                <div class="step-connector">
+                    <svg width="40" height="24" viewBox="0 0 40 24"><path d="M0 12h36M28 4l8 8-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                </div>
+                <div class="step-card" style="--delay: 0.3s">
+                    <div class="step-number">02</div>
+                    <div class="step-icon">🤖</div>
+                    <h3>AI Matches Schemes</h3>
+                    <p>Our Gemini AI engine analyzes your profile against 22+ government schemes to find your perfect matches.</p>
+                </div>
+                <div class="step-connector">
+                    <svg width="40" height="24" viewBox="0 0 40 24"><path d="M0 12h36M28 4l8 8-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                </div>
+                <div class="step-card" style="--delay: 0.5s">
+                    <div class="step-number">03</div>
+                    <div class="step-icon">🎯</div>
+                    <h3>Get Personalized Results</h3>
+                    <p>See matching schemes with benefits, eligibility reasons, documents needed, and how to apply — all in one place.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ SCHEME FINDER FORM ============ -->
+    <section class="finder-section" id="find-schemes">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-badge">AI-Powered</span>
+                <h2 class="section-title">Find Your Schemes</h2>
+                <p class="section-subtitle">Fill in your details below — we'll match you with eligible government schemes</p>
+            </div>
+
+            <div class="form-wrapper">
+                <!-- Progress Bar -->
+                <div class="form-progress">
+                    <div class="progress-track">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <div class="progress-steps">
+                        <div class="progress-step active" data-step="1">
+                            <div class="step-dot">1</div>
+                            <span>Personal</span>
+                        </div>
+                        <div class="progress-step" data-step="2">
+                            <div class="step-dot">2</div>
+                            <span>Social</span>
+                        </div>
+                        <div class="progress-step" data-step="3">
+                            <div class="step-dot">3</div>
+                            <span>Additional</span>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="scheme-form" class="scheme-form" autocomplete="off">
+                    <!-- Step 1: Personal Info -->
+                    <div class="form-step active" id="step-1">
+                        <h3 class="step-title">👤 Personal Information</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="age">Age</label>
+                                <input type="number" id="age" name="age" placeholder="e.g. 25" min="1" max="120" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">Gender</label>
+                                <div class="radio-group" id="gender-group">
+                                    <label class="radio-card">
+                                        <input type="radio" name="gender" value="male" required>
+                                        <span class="radio-label">👨 Male</span>
+                                    </label>
+                                    <label class="radio-card">
+                                        <input type="radio" name="gender" value="female">
+                                        <span class="radio-label">👩 Female</span>
+                                    </label>
+                                    <label class="radio-card">
+                                        <input type="radio" name="gender" value="other">
+                                        <span class="radio-label">🧑 Other</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="state">State / UT</label>
+                                <select id="state" name="state" required>
+                                    <option value="">Select your state</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <div></div>
+                            <button type="button" class="btn-primary" onclick="nextStep(2)">
+                                Next Step
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Social Info -->
+                    <div class="form-step" id="step-2">
+                        <h3 class="step-title">🏷️ Social & Economic Details</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="category">Category</label>
+                                <div class="radio-group" id="category-group">
+                                    <label class="radio-card">
+                                        <input type="radio" name="category" value="general" required>
+                                        <span class="radio-label">General</span>
+                                    </label>
+                                    <label class="radio-card">
+                                        <input type="radio" name="category" value="obc">
+                                        <span class="radio-label">OBC</span>
+                                    </label>
+                                    <label class="radio-card">
+                                        <input type="radio" name="category" value="sc">
+                                        <span class="radio-label">SC</span>
+                                    </label>
+                                    <label class="radio-card">
+                                        <input type="radio" name="category" value="st">
+                                        <span class="radio-label">ST</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="occupation">Occupation</label>
+                                <select id="occupation" name="occupation" required>
+                                    <option value="">Select occupation</option>
+                                    <option value="student">📚 Student</option>
+                                    <option value="farmer">🌾 Farmer</option>
+                                    <option value="salaried">💼 Salaried/Job</option>
+                                    <option value="business">🏪 Business Owner</option>
+                                    <option value="self-employed">🔧 Self-Employed</option>
+                                    <option value="unemployed">🔍 Unemployed</option>
+                                    <option value="homemaker">🏠 Homemaker</option>
+                                </select>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="income">Annual Family Income (₹)</label>
+                                <input type="number" id="income" name="annual_income" placeholder="e.g. 200000" min="0" required>
+                                <span class="form-hint" id="income-hint">Enter approximate yearly income</span>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn-ghost" onclick="prevStep(1)">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                                Back
+                            </button>
+                            <button type="button" class="btn-primary" onclick="nextStep(3)">
+                                Next Step
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Additional Info -->
+                    <div class="form-step" id="step-3">
+                        <h3 class="step-title">📋 Additional Details</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="education">Education Level</label>
+                                <select id="education" name="education">
+                                    <option value="none">No Formal Education</option>
+                                    <option value="primary">Primary (1st-5th)</option>
+                                    <option value="secondary">Secondary (6th-12th)</option>
+                                    <option value="graduate" selected>Graduate</option>
+                                    <option value="postgraduate">Post Graduate</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="marital_status">Marital Status</label>
+                                <select id="marital_status" name="marital_status">
+                                    <option value="single">Single</option>
+                                    <option value="married">Married</option>
+                                    <option value="widowed">Widowed</option>
+                                    <option value="divorced">Divorced</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Do you own agricultural land?</label>
+                                <div class="toggle-group">
+                                    <label class="toggle-card">
+                                        <input type="radio" name="has_land" value="true">
+                                        <span class="toggle-label">Yes</span>
+                                    </label>
+                                    <label class="toggle-card">
+                                        <input type="radio" name="has_land" value="false" checked>
+                                        <span class="toggle-label">No</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Do you have a bank account?</label>
+                                <div class="toggle-group">
+                                    <label class="toggle-card">
+                                        <input type="radio" name="has_bank_account" value="true" checked>
+                                        <span class="toggle-label">Yes</span>
+                                    </label>
+                                    <label class="toggle-card">
+                                        <input type="radio" name="has_bank_account" value="false">
+                                        <span class="toggle-label">No</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Do you have any disability?</label>
+                                <div class="toggle-group">
+                                    <label class="toggle-card">
+                                        <input type="radio" name="disability" value="true">
+                                        <span class="toggle-label">Yes</span>
+                                    </label>
+                                    <label class="toggle-card">
+                                        <input type="radio" name="disability" value="false" checked>
+                                        <span class="toggle-label">No</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn-ghost" onclick="prevStep(2)">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                                Back
+                            </button>
+                            <button type="submit" class="btn-primary btn-find" id="find-btn">
+                                <span class="btn-text">🔍 Find My Schemes</span>
+                                <span class="btn-loading" style="display:none">
+                                    <span class="spinner"></span> Analyzing with AI...
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ RESULTS SECTION ============ -->
+    <section class="results-section" id="results-section" style="display: none;">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-badge" id="results-badge">Results</span>
+                <h2 class="section-title" id="results-title">Your Eligible Schemes</h2>
+            </div>
+
+            <!-- AI Summary Card -->
+            <div class="ai-summary-card" id="ai-summary-card">
+                <div class="ai-card-header">
+                    <span class="ai-icon">✦</span>
+                    <span>AI Recommendation</span>
+                    <span class="ai-badge">Gemini AI</span>
+                </div>
+                <p class="ai-summary-text" id="ai-summary-text"></p>
+            </div>
+
+            <!-- Results Grid -->
+            <div class="results-grid" id="results-grid">
+                <!-- Scheme cards will be injected here by JS -->
+            </div>
+
+            <!-- No Results -->
+            <div class="no-results" id="no-results" style="display: none;">
+                <div class="no-results-icon">🔍</div>
+                <h3>No Matching Schemes Found</h3>
+                <p>Try adjusting your profile details — you may be eligible for more schemes than you think!</p>
+                <button class="btn-primary" onclick="scrollToSection('find-schemes')">Modify Profile</button>
+            </div>
+
+            <!-- Actions -->
+            <div class="results-actions" id="results-actions">
+                <button class="btn-ghost" onclick="scrollToSection('find-schemes')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                    Modify Profile
+                </button>
+                <button class="btn-primary" onclick="toggleChat()">
+                    💬 Ask AI About Schemes
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ AI CHAT ============ -->
+    <div class="chat-widget" id="chat-widget">
+        <div class="chat-header">
+            <div class="chat-header-info">
+                <span class="chat-dot"></span>
+                <span class="chat-title">SchemeConnect AI</span>
+            </div>
+            <button class="chat-close" id="chat-close-btn" onclick="toggleChat()">✕</button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="chat-msg bot">
+                <div class="msg-avatar">🤖</div>
+                <div class="msg-bubble">Hi! I'm SchemeConnect AI. Ask me anything about government schemes — eligibility, documents needed, how to apply, or any questions you have!</div>
+            </div>
+        </div>
+        <div class="chat-typing" id="chat-typing">
+            <div class="typing-dots">
+                <span></span><span></span><span></span>
+            </div>
+            <span>AI is thinking...</span>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" placeholder="Ask about any scheme..." autocomplete="off">
+            <button id="chat-send-btn" onclick="sendChatMessage()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Chat FAB -->
+    <button class="chat-fab" id="chat-fab" onclick="toggleChat()">
+        <span class="fab-icon">💬</span>
+        <span class="fab-pulse"></span>
+    </button>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+        <div class="section-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-icon">🏛️</span>
+                    <span class="logo-text">Scheme<span class="logo-accent">Connect</span> AI</span>
+                </div>
+                <p class="footer-text">
+                    Built for Google Solution Challenge 2026 | UN SDG 1: No Poverty & SDG 10: Reduced Inequalities
+                </p>
+                <p class="footer-disclaimer">
+                    ⚠️ Disclaimer: This tool provides AI-based recommendations. Always verify eligibility on official government websites before applying.
+                </p>
+                <div class="footer-tech">
+                    <span>Built with</span>
+                    <span class="tech-badge">Gemini AI</span>
+                    <span class="tech-badge">FastAPI</span>
+                    <span class="tech-badge">Python</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
