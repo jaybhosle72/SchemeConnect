@@ -459,6 +459,592 @@ SCHEMES = [
         "official_link": "https://nsap.nic.in",
         "potential_benefit_amount": "₹200-₹2,000/month"
     },
+
+    # ─────────────────── ADDITIONAL AGRICULTURE ───────────────────
+    {
+        "id": "fasal-bima",
+        "name": "PM Fasal Bima Yojana",
+        "short_name": "PMFBY",
+        "category": "Agriculture",
+        "icon": "🌿",
+        "description": "Crop insurance scheme providing financial support to farmers in case of crop failure due to natural calamities, pests, and diseases.",
+        "benefits": "Low premium: 2% for Kharif, 1.5% for Rabi, 5% for commercial crops. Full sum insured for crop loss.",
+        "eligibility": {
+            "occupations": ["farmer"],
+            "has_land": True,
+            "categories": ["general", "obc", "sc", "st"],
+            "gender": "all"
+        },
+        "documents": ["Aadhaar Card", "Land Records", "Bank Account", "Sowing Certificate"],
+        "how_to_apply": "Apply through bank, CSC, or pmfby.gov.in before sowing season deadline.",
+        "official_link": "https://pmfby.gov.in",
+        "potential_benefit_amount": "Full crop value insurance"
+    },
+    {
+        "id": "kisan-credit",
+        "name": "Kisan Credit Card",
+        "short_name": "KCC",
+        "category": "Agriculture",
+        "icon": "💳",
+        "description": "Flexible credit facility for farmers to meet their agricultural and allied expenses including crop cultivation and farm maintenance.",
+        "benefits": "Credit up to ₹3 lakh at 4% interest (after subsidy). Crop insurance included. Flexible repayment.",
+        "eligibility": {
+            "occupations": ["farmer"],
+            "min_age": 18,
+            "max_age": 75,
+            "categories": ["general", "obc", "sc", "st"],
+            "gender": "all"
+        },
+        "documents": ["Aadhaar Card", "Land Records", "Passport Photo", "Bank Account"],
+        "how_to_apply": "Apply at any bank branch or through PM-KISAN portal for existing PM-KISAN beneficiaries.",
+        "official_link": "https://pmkisan.gov.in",
+        "potential_benefit_amount": "Up to ₹3,00,000 credit at 4%"
+    },
+    {
+        "id": "soil-health",
+        "name": "Soil Health Card Scheme",
+        "short_name": "SHC",
+        "category": "Agriculture",
+        "icon": "🧪",
+        "description": "Free soil testing and health card for farmers with crop-wise fertilizer recommendations to improve productivity and reduce costs.",
+        "benefits": "Free soil testing every 2 years. Customized fertilizer recommendations. Improved crop yield by 10-15%.",
+        "eligibility": {
+            "occupations": ["farmer"],
+            "has_land": True,
+            "categories": ["general", "obc", "sc", "st"],
+            "gender": "all"
+        },
+        "documents": ["Aadhaar Card", "Land Details"],
+        "how_to_apply": "Contact nearest Krishi Vigyan Kendra or Agriculture Department. Apply at soilhealth.dac.gov.in.",
+        "official_link": "https://soilhealth.dac.gov.in",
+        "potential_benefit_amount": "Free soil testing + higher yield"
+    },
+
+    # ─────────────────── ADDITIONAL HEALTH ───────────────────
+    {
+        "id": "janani-suraksha",
+        "name": "Janani Suraksha Yojana",
+        "short_name": "JSY",
+        "category": "Health",
+        "icon": "🏥",
+        "description": "Cash assistance to pregnant women for institutional delivery to reduce maternal and neonatal mortality.",
+        "benefits": "₹1,400 (rural) or ₹1,000 (urban) cash assistance for hospital delivery. Free delivery services.",
+        "eligibility": {
+            "gender": "female",
+            "min_age": 19,
+            "max_income": 300000,
+            "categories": ["general", "obc", "sc", "st"]
+        },
+        "documents": ["Aadhaar Card", "JSY Card", "Bank Account", "Delivery Certificate"],
+        "how_to_apply": "Register at nearest government hospital or Anganwadi center during pregnancy.",
+        "official_link": "https://nhm.gov.in",
+        "potential_benefit_amount": "₹1,000-₹1,400 per delivery"
+    },
+    {
+        "id": "ab-health-wellness",
+        "name": "Ayushman Bharat Health & Wellness Centers",
+        "short_name": "AB-HWC",
+        "category": "Health",
+        "icon": "⚕️",
+        "description": "Free primary healthcare services including free essential medicines, diagnostics, and teleconsultation at 1.5 lakh Health & Wellness Centers.",
+        "benefits": "Free OPD consultation, 12 types of free diagnostics, free essential medicines, teleconsultation, yoga & wellness activities.",
+        "eligibility": {
+            "categories": ["general", "obc", "sc", "st"],
+            "gender": "all"
+        },
+        "documents": ["Aadhaar Card or any ID Proof"],
+        "how_to_apply": "Visit nearest Health & Wellness Center (erstwhile Sub Centre/PHC). No registration needed.",
+        "official_link": "https://ab-hwc.nhp.gov.in",
+        "potential_benefit_amount": "Free healthcare services"
+    },
+
+    # ─────────────────── ADDITIONAL EDUCATION ───────────────────
+    {
+        "id": "central-scholarship-sc",
+        "name": "Post Matric Scholarship for SC Students",
+        "short_name": "PMS-SC",
+        "category": "Education",
+        "icon": "📚",
+        "description": "Full scholarship for SC students studying post-matric (Class 11 onwards) covering tuition fees, maintenance allowance, and study tour charges.",
+        "benefits": "Full tuition fee + ₹550-₹1,200/month maintenance + Book allowance + Study tour charges",
+        "eligibility": {
+            "categories": ["sc"],
+            "occupations": ["student"],
+            "max_income": 250000,
+            "gender": "all"
+        },
+        "documents": ["Caste Certificate", "Income Certificate", "Marksheets", "Aadhaar Card", "Bank Account"],
+        "how_to_apply": "Apply through National Scholarship Portal (scholarships.gov.in) during Oct-Dec window.",
+        "official_link": "https://scholarships.gov.in",
+        "potential_benefit_amount": "Full tuition + ₹14,400/year"
+    },
+    {
+        "id": "central-scholarship-st",
+        "name": "Post Matric Scholarship for ST Students",
+        "short_name": "PMS-ST",
+        "category": "Education",
+        "icon": "📖",
+        "description": "Scholarship for ST students studying post-matric covering full tuition fees, maintenance allowance, and additional allowances.",
+        "benefits": "Full tuition + ₹550-₹1,200/month maintenance + Book grant + Thesis typing charges",
+        "eligibility": {
+            "categories": ["st"],
+            "occupations": ["student"],
+            "max_income": 250000,
+            "gender": "all"
+        },
+        "documents": ["Tribe Certificate", "Income Certificate", "Marksheets", "Aadhaar Card", "Bank Account"],
+        "how_to_apply": "Apply through National Scholarship Portal (scholarships.gov.in).",
+        "official_link": "https://scholarships.gov.in",
+        "potential_benefit_amount": "Full tuition + ₹14,400/year"
+    },
+    {
+        "id": "obc-scholarship",
+        "name": "Post Matric Scholarship for OBC Students",
+        "short_name": "PMS-OBC",
+        "category": "Education",
+        "icon": "🎓",
+        "description": "Financial assistance for OBC students studying in post-matric or post-secondary courses in recognized institutions.",
+        "benefits": "Tuition fee reimbursement + ₹500-₹1,000/month maintenance allowance",
+        "eligibility": {
+            "categories": ["obc"],
+            "occupations": ["student"],
+            "max_income": 300000,
+            "gender": "all"
+        },
+        "documents": ["OBC Certificate", "Income Certificate", "Marksheets", "Aadhaar Card", "Bank Account"],
+        "how_to_apply": "Apply through National Scholarship Portal (scholarships.gov.in).",
+        "official_link": "https://scholarships.gov.in",
+        "potential_benefit_amount": "Tuition + ₹12,000/year"
+    },
+    {
+        "id": "vidyalakshmi",
+        "name": "Vidya Lakshmi Education Loan Portal",
+        "short_name": "Vidya Lakshmi",
+        "category": "Education",
+        "icon": "🏫",
+        "description": "Single window portal for students to access education loans from multiple banks and apply for government scholarships.",
+        "benefits": "Education loans up to ₹20 lakh (India) / ₹30 lakh (abroad). Interest subsidy for economically weaker students.",
+        "eligibility": {
+            "occupations": ["student"],
+            "categories": ["general", "obc", "sc", "st"],
+            "gender": "all",
+            "min_age": 16,
+            "max_age": 35
+        },
+        "documents": ["Admission Letter", "Course Fee Structure", "Marksheets", "Aadhaar Card", "Income Proof"],
+        "how_to_apply": "Register at vidyalakshmi.co.in. Apply to multiple banks through single form.",
+        "official_link": "https://www.vidyalakshmi.co.in",
+        "potential_benefit_amount": "Up to ₹20L education loan"
+    },
+    {
+        "id": "free-coaching-sc",
+        "name": "Free Coaching for SC/ST Students",
+        "short_name": "Free Coaching",
+        "category": "Education",
+        "icon": "✏️",
+        "description": "Free coaching for competitive exams (UPSC, SSC, Banking, Engineering, Medical) for SC/ST students at reputed coaching institutes.",
+        "benefits": "Free coaching at top institutes + ₹3,000/month stipend + ₹15,000/year book allowance",
+        "eligibility": {
+            "categories": ["sc", "st"],
+            "occupations": ["student", "unemployed"],
+            "max_income": 600000,
+            "gender": "all",
+            "min_age": 16,
+            "max_age": 35
+        },
+        "documents": ["Caste Certificate", "Income Certificate", "Educational Certificates", "Aadhaar Card"],
+        "how_to_apply": "Apply through coaching.dosje.gov.in when applications are open (usually July-Sept).",
+        "official_link": "https://coaching.dosje.gov.in",
+        "potential_benefit_amount": "Free coaching + ₹51,000/year"
+    },
+
+    # ─────────────────── WOMEN EMPOWERMENT ───────────────────
+    {
+        "id": "mahila-samman",
+        "name": "Mahila Samman Savings Certificate",
+        "short_name": "MSSC",
+        "category": "Women & Child",
+        "icon": "💰",
+        "description": "Special savings scheme for women offering 7.5% interest rate with partial withdrawal facility. Invest up to ₹2 lakh for 2 years.",
+        "benefits": "7.5% annual interest (highest among fixed deposits). Partial withdrawal after 1 year. Tax benefits.",
+        "eligibility": {
+            "gender": "female",
+            "categories": ["general", "obc", "sc", "st"]
+        },
+        "documents": ["Aadhaar Card", "PAN Card", "Bank Account"],
+        "how_to_apply": "Open at any post office or authorized bank. Minimum deposit ₹1,000.",
+        "official_link": "https://www.indiapost.gov.in",
+        "potential_benefit_amount": "7.5% interest on up to ₹2L"
+    },
+    {
+        "id": "free-silai-machine",
+        "name": "Free Silai Machine Yojana",
+        "short_name": "Silai Machine",
+        "category": "Women & Child",
+        "icon": "🧵",
+        "description": "Free sewing machine distribution to poor and labor class women to enable self-employment and financial independence.",
+        "benefits": "Free sewing machine + Basic training for tailoring and stitching",
+        "eligibility": {
+            "gender": "female",
+            "min_age": 20,
+            "max_age": 40,
+            "max_income": 200000,
+            "categories": ["general", "obc", "sc", "st"]
+        },
+        "documents": ["Aadhaar Card", "Income Certificate", "Age Proof", "Passport Photo", "Mobile Number"],
+        "how_to_apply": "Apply through India.gov.in or contact District Industries Center.",
+        "official_link": "https://www.india.gov.in",
+        "potential_benefit_amount": "Free sewing machine"
+    },
+    {
+        "id": "one-stop-centre",
+        "name": "One Stop Centre (Sakhi)",
+        "short_name": "OSC",
+        "category": "Women & Child",
+        "icon": "🛡️",
+        "description": "Support center for women affected by violence providing medical aid, legal aid, counseling, shelter, and police facilitation under one roof.",
+        "benefits": "Free medical aid + Legal assistance + Psychological counseling + Temporary shelter (up to 5 days) + Police facilitation",
+        "eligibility": {
+            "gender": "female",
+            "categories": ["general", "obc", "sc", "st"]
+        },
+        "documents": ["No documents required for emergency support"],
+        "how_to_apply": "Call Women Helpline 181 or visit nearest One Stop Centre. Can also reach through Sakhi app.",
+        "official_link": "https://wcd.nic.in",
+        "potential_benefit_amount": "Free support services"
+    },
+    {
+        "id": "beti-bachao",
+        "name": "Beti Bachao Beti Padhao",
+        "short_name": "BBBP",
+        "category": "Women & Child",
+        "icon": "👧",
+        "description": "National campaign for survival, protection, and education of the girl child. Promotes girl child education with financial incentives.",
+        "benefits": "Awareness campaigns + Girl child education support + Sukanya Samriddhi account linkage + Community mobilization",
+        "eligibility": {
+            "gender": "female",
+            "max_age": 18,
+            "categories": ["general", "obc", "sc", "st"]
+        },
+        "documents": ["Birth Certificate", "Aadhaar Card", "School Certificate"],
+        "how_to_apply": "Contact District Women & Child Development Office or nearest Anganwadi center.",
+        "official_link": "https://wcd.nic.in/bbbp-schemes",
+        "potential_benefit_amount": "Education support + awareness"
+    },
+
+    # ─────────────────── DISABILITY ───────────────────
+    {
+        "id": "disability-pension",
+        "name": "Indira Gandhi National Disability Pension",
+        "short_name": "IGNDPS",
+        "category": "Disability",
+        "icon": "♿",
+        "description": "Monthly pension for persons with severe and multiple disabilities (80%+) belonging to BPL households.",
+        "benefits": "₹300/month from Centre (18-79 years) or ₹500/month (80+ years). States add additional amount.",
+        "eligibility": {
+            "min_age": 18,
+            "max_income": 200000,
+            "categories": ["general", "obc", "sc", "st"],
+            "gender": "all"
+        },
+        "documents": ["Disability Certificate (80%+)", "BPL Certificate", "Aadhaar Card", "Bank Account"],
+        "how_to_apply": "Apply through District Social Welfare Office or Gram Panchayat.",
+        "official_link": "https://nsap.nic.in",
+        "potential_benefit_amount": "₹300-₹500/month pension"
+    },
+    {
+        "id": "adip",
+        "name": "Assistance for Disabled Persons (ADIP)",
+        "short_name": "ADIP",
+        "category": "Disability",
+        "icon": "🦽",
+        "description": "Free assistive devices and aids like wheelchairs, hearing aids, artificial limbs, and Braille kits for persons with disabilities.",
+        "benefits": "Free modern aids & appliances worth up to ₹10,000. Travel expense reimbursement for fitting camps.",
+        "eligibility": {
+            "max_income": 300000,
+            "categories": ["general", "obc", "sc", "st"],
+            "gender": "all"
+        },
+        "documents": ["Disability Certificate (40%+)", "Income Certificate", "Aadhaar Card", "Prescription from Doctor"],
+        "how_to_apply": "Apply through ALIMCO (alimco.in) or attend assistance camps organized by implementing agencies.",
+        "official_link": "https://www.alimco.in",
+        "potential_benefit_amount": "Free aids worth ₹10,000+"
+    },
+    {
+        "id": "sugamya-bharat",
+        "name": "Accessible India Campaign (Sugamya Bharat)",
+        "short_name": "Sugamya Bharat",
+        "category": "Disability",
+        "icon": "🏗️",
+        "description": "Making public spaces, transport, and ICT accessible for persons with disabilities. Includes accessible websites, buildings, and transport.",
+        "benefits": "Accessible government buildings, websites, and transport. Sign language interpreters. Accessible formats of documents.",
+        "eligibility": {
+            "categories": ["general", "obc", "sc", "st"],
+            "gender": "all"
+        },
+        "documents": ["Disability Certificate"],
+        "how_to_apply": "Report accessibility issues at accessibleindia.gov.in or through Sugamya Bharat app.",
+        "official_link": "https://accessibleindia.gov.in",
+        "potential_benefit_amount": "Improved accessibility"
+    },
+
+    # ─────────────────── LABOUR & WORKERS ───────────────────
+    {
+        "id": "epfo",
+        "name": "Employee Provident Fund (EPF)",
+        "short_name": "EPF",
+        "category": "Labour",
+        "icon": "🏢",
+        "description": "Mandatory savings scheme for salaried employees earning up to ₹15,000/month. Employer contributes equal amount. 8.25% annual interest.",
+        "benefits": "12% employee + 12% employer contribution. 8.25% tax-free interest. Pension after 58. Life insurance up to ₹7 lakh.",
+        "eligibility": {
+            "occupations": ["salaried"],
+            "min_age": 18,
+            "max_age": 58,
+            "categories": ["general", "obc", "sc", "st"],
+            "gender": "all"
+        },
+        "documents": ["Aadhaar Card", "PAN Card", "Bank Account", "Employment Letter"],
+        "how_to_apply": "Automatic enrollment by employer for organizations with 20+ employees. Check balance at epfindia.gov.in.",
+        "official_link": "https://www.epfindia.gov.in",
+        "potential_benefit_amount": "Retirement corpus + pension"
+    },
+    {
+        "id": "esic",
+        "name": "Employee State Insurance (ESI)",
+        "short_name": "ESIC",
+        "category": "Labour",
+        "icon": "🩺",
+        "description": "Social security and health insurance for workers earning up to ₹21,000/month. Covers medical, sickness, maternity, and disability benefits.",
+        "benefits": "Free medical care for family. 70% salary during sickness. 100% salary during maternity (26 weeks). Disability pension.",
+        "eligibility": {
+            "occupations": ["salaried"],
+            "max_income": 252000,
+            "min_age": 18,
+            "categories": ["general", "obc", "sc", "st"],
+            "gender": "all"
+        },
+        "documents": ["Aadhaar Card", "Employment Details", "Bank Account", "Family Photo"],
+        "how_to_apply": "Automatic enrollment by employer. Get ESI card from nearest ESIC branch office.",
+        "official_link": "https://www.esic.gov.in",
+        "potential_benefit_amount": "Free healthcare + salary during leave"
+    },
+    {
+        "id": "e-shram",
+        "name": "e-Shram Card (Unorganized Workers)",
+        "short_name": "e-Shram",
+        "category": "Labour",
+        "icon": "👷",
+        "description": "National database for unorganized workers providing unique ID and access to social security schemes. Includes accidental insurance of ₹2 lakh.",
+        "benefits": "₹2 lakh accidental insurance (free). Access to PM schemes. Digital identity for welfare benefits.",
+        "eligibility": {
+            "min_age": 16,
+            "max_age": 59,
+            "max_income": 200000,
+            "categories": ["general", "obc", "sc", "st"],
+            "gender": "all",
+            "occupations": ["farmer", "self-employed", "business", "unemployed", "homemaker"]
+        },
+        "documents": ["Aadhaar Card", "Bank Account", "Mobile Number"],
+        "how_to_apply": "Register at eshram.gov.in or through nearest CSC center. Self-registration with Aadhaar and mobile.",
+        "official_link": "https://eshram.gov.in",
+        "potential_benefit_amount": "₹2L insurance + scheme access"
+    },
+    {
+        "id": "pm-shram-yogi",
+        "name": "PM Shram Yogi MaanDhan Yojana",
+        "short_name": "PM-SYM",
+        "category": "Labour",
+        "icon": "🔧",
+        "description": "Voluntary pension scheme for unorganized workers. Contribute ₹55-₹200/month based on age and get ₹3,000/month pension after 60.",
+        "benefits": "₹3,000/month guaranteed pension after age 60. Government matches your contribution. Family pension for spouse.",
+        "eligibility": {
+            "min_age": 18,
+            "max_age": 40,
+            "max_income": 180000,
+            "categories": ["general", "obc", "sc", "st"],
+            "gender": "all",
+            "occupations": ["farmer", "self-employed", "business", "homemaker"]
+        },
+        "documents": ["Aadhaar Card", "Bank Account", "Mobile Number"],
+        "how_to_apply": "Register through CSC center or at maandhan.in. Monthly auto-debit from bank account.",
+        "official_link": "https://maandhan.in",
+        "potential_benefit_amount": "₹3,000/month pension after 60"
+    },
+
+    # ─────────────────── DIGITAL & TECHNOLOGY ───────────────────
+    {
+        "id": "digital-india",
+        "name": "Digital India - Free Wi-Fi (PM WANI)",
+        "short_name": "PM WANI",
+        "category": "Digital",
+        "icon": "📶",
+        "description": "Free or affordable public Wi-Fi hotspots across India through PM WANI (Wi-Fi Access Network Interface) scheme.",
+        "benefits": "Free Wi-Fi access at public places. Affordable broadband connectivity. Business opportunity as Wi-Fi provider.",
+        "eligibility": {
+            "categories": ["general", "obc", "sc", "st"],
+            "gender": "all"
+        },
+        "documents": ["Mobile Number for OTP verification"],
+        "how_to_apply": "Connect to PM WANI hotspot in your area. Verify with mobile OTP. Start browsing.",
+        "official_link": "https://dot.gov.in/pm-wani",
+        "potential_benefit_amount": "Free Wi-Fi access"
+    },
+    {
+        "id": "digilocker",
+        "name": "DigiLocker",
+        "short_name": "DigiLocker",
+        "category": "Digital",
+        "icon": "📱",
+        "description": "Free cloud-based platform to store, share, and verify documents digitally. Accepted as valid documents by government agencies.",
+        "benefits": "Free digital document storage. Verified certificates from universities/boards. Paperless governance. Valid for all government services.",
+        "eligibility": {
+            "categories": ["general", "obc", "sc", "st"],
+            "gender": "all"
+        },
+        "documents": ["Aadhaar Card for registration"],
+        "how_to_apply": "Download DigiLocker app or register at digilocker.gov.in with Aadhaar.",
+        "official_link": "https://www.digilocker.gov.in",
+        "potential_benefit_amount": "Free digital document storage"
+    },
+
+    # ─────────────────── ADDITIONAL SENIOR CITIZENS ───────────────────
+    {
+        "id": "senior-citizen-savings",
+        "name": "Senior Citizens Savings Scheme",
+        "short_name": "SCSS",
+        "category": "Senior Citizens",
+        "icon": "🏦",
+        "description": "Government-backed savings scheme for senior citizens (60+) offering 8.2% interest with quarterly payouts and tax benefits.",
+        "benefits": "8.2% annual interest paid quarterly. Maximum deposit ₹30 lakh. Tax benefit under 80C. Premature withdrawal allowed.",
+        "eligibility": {
+            "min_age": 60,
+            "categories": ["general", "obc", "sc", "st"],
+            "gender": "all"
+        },
+        "documents": ["Age Proof", "Aadhaar Card", "PAN Card", "Passport Photo"],
+        "how_to_apply": "Open account at any post office or authorized bank. Minimum deposit ₹1,000.",
+        "official_link": "https://www.indiapost.gov.in",
+        "potential_benefit_amount": "8.2% interest on up to ₹30L"
+    },
+    {
+        "id": "vayoshreshtha",
+        "name": "Rashtriya Vayoshri Yojana",
+        "short_name": "RVY",
+        "category": "Senior Citizens",
+        "icon": "🧓",
+        "description": "Free physical aids and assisted living devices for senior citizens belonging to BPL category to improve their quality of life.",
+        "benefits": "Free walking sticks, spectacles, hearing aids, dentures, wheelchairs, and other assisted devices.",
+        "eligibility": {
+            "min_age": 60,
+            "max_income": 200000,
+            "categories": ["general", "obc", "sc", "st"],
+            "gender": "all"
+        },
+        "documents": ["Age Proof", "BPL Certificate", "Aadhaar Card"],
+        "how_to_apply": "Attend free distribution camps organized by ALIMCO in your district. Contact District Social Welfare Officer.",
+        "official_link": "https://www.alimco.in",
+        "potential_benefit_amount": "Free assisted devices"
+    },
+
+    # ─────────────────── RURAL DEVELOPMENT ───────────────────
+    {
+        "id": "pm-gram-sadak",
+        "name": "PM Gram Sadak Yojana",
+        "short_name": "PMGSY",
+        "category": "Rural",
+        "icon": "🛣️",
+        "description": "All-weather road connectivity to unconnected rural habitations. Includes road construction, upgradation, and maintenance.",
+        "benefits": "All-weather road to your village. Better market access. Improved healthcare & education access. Employment during construction.",
+        "eligibility": {
+            "categories": ["general", "obc", "sc", "st"],
+            "gender": "all"
+        },
+        "documents": ["No individual application needed — implemented through Gram Panchayat"],
+        "how_to_apply": "Contact Gram Panchayat or District Rural Development Agency. Check status at omms.nic.in.",
+        "official_link": "https://omms.nic.in",
+        "potential_benefit_amount": "Road connectivity to village"
+    },
+    {
+        "id": "swachh-bharat-gramin",
+        "name": "Swachh Bharat Mission (Gramin)",
+        "short_name": "SBM-G",
+        "category": "Rural",
+        "icon": "🚽",
+        "description": "Financial incentive for construction of individual household toilets in rural areas to achieve open defecation free status.",
+        "benefits": "₹12,000 incentive for toilet construction. Free solid & liquid waste management. Village-level sanitation infrastructure.",
+        "eligibility": {
+            "max_income": 300000,
+            "categories": ["general", "obc", "sc", "st"],
+            "gender": "all"
+        },
+        "documents": ["Aadhaar Card", "BPL Card/Income Proof", "Bank Account", "Photo of household"],
+        "how_to_apply": "Apply through Gram Panchayat or Block Development Office. Register at sbm.gov.in.",
+        "official_link": "https://sbm.gov.in",
+        "potential_benefit_amount": "₹12,000 for toilet construction"
+    },
+    {
+        "id": "pm-awas-gramin",
+        "name": "PM Awas Yojana - Gramin",
+        "short_name": "PMAY-G",
+        "category": "Housing",
+        "icon": "🏡",
+        "description": "Financial assistance for construction of pucca house with basic amenities for rural homeless and those living in kutcha/dilapidated houses.",
+        "benefits": "₹1,20,000 (plain areas) or ₹1,30,000 (hilly areas) for house construction + 90/95 days MGNREGA wages.",
+        "eligibility": {
+            "max_income": 200000,
+            "categories": ["general", "obc", "sc", "st"],
+            "gender": "all",
+            "min_age": 18
+        },
+        "documents": ["Aadhaar Card", "Job Card", "Bank Account", "SECC Data verification"],
+        "how_to_apply": "Selected from SECC-2011 data. Contact Gram Panchayat or Block Development Office.",
+        "official_link": "https://pmayg.nic.in",
+        "potential_benefit_amount": "₹1,20,000-₹1,30,000"
+    },
+
+    # ─────────────────── ADDITIONAL FINANCIAL ───────────────────
+    {
+        "id": "national-pension",
+        "name": "National Pension System (NPS)",
+        "short_name": "NPS",
+        "category": "Financial Inclusion",
+        "icon": "📊",
+        "description": "Voluntary retirement savings scheme with market-linked returns. Extra tax benefit of ₹50,000 under Section 80CCD(1B) over and above 80C limit.",
+        "benefits": "Market-linked returns (10-12% average). Extra ₹50,000 tax deduction. 60% lump sum at retirement. 40% as annuity pension.",
+        "eligibility": {
+            "min_age": 18,
+            "max_age": 70,
+            "categories": ["general", "obc", "sc", "st"],
+            "gender": "all",
+            "has_bank_account": True
+        },
+        "documents": ["Aadhaar Card", "PAN Card", "Bank Account", "Passport Photo"],
+        "how_to_apply": "Open account at enps.nsdl.com or through any POP (Point of Presence) like banks and post offices.",
+        "official_link": "https://npscra.nsdl.co.in",
+        "potential_benefit_amount": "Retirement corpus + tax savings"
+    },
+    {
+        "id": "pmjjy-micro-pension",
+        "name": "PM Kisan MaanDhan Yojana",
+        "short_name": "PM-KMY",
+        "category": "Agriculture",
+        "icon": "👨‍🌾",
+        "description": "Pension scheme for small and marginal farmers. Contribute ₹55-₹200/month and get ₹3,000/month guaranteed pension after age 60.",
+        "benefits": "₹3,000/month pension after age 60. Government matches equal contribution. Family pension for spouse after death.",
+        "eligibility": {
+            "min_age": 18,
+            "max_age": 40,
+            "occupations": ["farmer"],
+            "has_land": True,
+            "categories": ["general", "obc", "sc", "st"],
+            "gender": "all"
+        },
+        "documents": ["Aadhaar Card", "Bank Account", "Land Records"],
+        "how_to_apply": "Register through nearest CSC center or at maandhan.in with Aadhaar and bank details.",
+        "official_link": "https://maandhan.in/shramyogi",
+        "potential_benefit_amount": "₹3,000/month pension after 60"
+    },
 ]
 
 
