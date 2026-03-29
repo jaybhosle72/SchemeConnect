@@ -56,32 +56,22 @@ else:
 # Models to try in order (fallback chain)
 MODEL_CHAIN = ["gemini-2.0-flash-lite", "gemini-2.0-flash"]
 
-async def call_gemini_with_retry(prompt: str, max_tokens: int = 300, retries: int = 3) -> str:
-    """Call Gemini API with automatic retry on rate limit and model fallback."""
+def call_gemini_fast(prompt: str, max_tokens: int = 300) -> str:
+    """Call Gemini API with quick model fallback. No long waits."""
     for model_name in MODEL_CHAIN:
-        for attempt in range(retries):
-            try:
-                response = client.models.generate_content(
-                    model=model_name,
-                    contents=prompt,
-                    config=types.GenerateContentConfig(
-                        temperature=0.7,
-                        max_output_tokens=max_tokens,
-                    )
+        try:
+            response = client.models.generate_content(
+                model=model_name,
+                contents=prompt,
+                config=types.GenerateContentConfig(
+                    temperature=0.7,
+                    max_output_tokens=max_tokens,
                 )
-                return response.text
-            except Exception as e:
-                error_str = str(e)
-                if "429" in error_str or "RESOURCE_EXHAUSTED" in error_str:
-                    # Rate limited - wait and retry
-                    wait_time = min(5 * (attempt + 1), 15)  # 5s, 10s, 15s
-                    print(f"[RATE LIMITED] Model {model_name}, attempt {attempt+1}/{retries}. Waiting {wait_time}s...")
-                    await asyncio.sleep(wait_time)
-                else:
-                    # Other error - try next model
-                    print(f"[ERROR] Model {model_name}: {e}")
-                    break
-    # All models and retries exhausted
+            )
+            return response.text
+        except Exception as e:
+            print(f"[{model_name}] Error: {e}")
+            continue
     return None
 
 
@@ -239,12 +229,13 @@ Write a brief, warm, personalized 3-4 sentence recommendation in simple English.
 - Keep it under 120 words
 - Do NOT use markdown formatting, bullet points, or asterisks - write in plain flowing text."""
 
-    result = await call_gemini_with_retry(prompt, max_tokens=300)
+    result = call_gemini_fast(prompt, max_tokens=300)
     if result:
         return result
-    # Fallback if all retries fail
+    # Instant fallback - no waiting
     if schemes:
-        return f"Great news, {profile.name}! You're eligible for {len(schemes)} government schemes. Review each one below for full details on benefits, required documents, and how to apply. Start your applications today!"
+        top_schemes = [s['name'] for s in schemes[:3]]
+        return f"Great news, {profile.name}! You're eligible for {len(schemes)} government schemes including {', '.join(top_schemes)}. Check out the details below to see your benefits, required documents, and how to apply. Don't miss out - start your applications today!"
     return "No matching schemes found based on your profile. Try adjusting your details - you may be eligible for more schemes than you think!"
 
 
@@ -270,11 +261,10 @@ Rules:
 
 User's question: {req.message}"""
 
-    result = await call_gemini_with_retry(prompt, max_tokens=500)
+    result = call_gemini_fast(prompt, max_tokens=500)
     if result:
         return {"response": result}
-    # Fallback if all retries fail
-    return {"response": "I'm sorry, the AI service is temporarily busy due to high demand. Please wait about 30 seconds and try again. In the meantime, you can browse the scheme details shown in your results above!"}
+    return {"response": "I'm sorry, the AI service is temporarily busy. The Gemini API free tier has a limit of 15 requests per minute. Please wait about 30 seconds and try again!"}
 
 
 @app.get("/api/states")
