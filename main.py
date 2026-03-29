@@ -25,8 +25,8 @@ from google.genai import types
 from dotenv import load_dotenv
 from schemes_data import SCHEMES, INDIAN_STATES
 
-# Load environment variables
-load_dotenv(override=True)
+# Load environment variables (from .env file if it exists, otherwise from system env)
+load_dotenv(override=False)
 
 # Initialize FastAPI
 app = FastAPI(
@@ -49,9 +49,9 @@ api_key = os.getenv("GEMINI_API_KEY")
 client = None
 if api_key and api_key != "your_gemini_api_key_here":
     client = genai.Client(api_key=api_key)
-    print("[OK] Gemini AI connected successfully!")
+    print(f"[OK] Gemini AI connected! Key starts with: {api_key[:10]}...")
 else:
-    print("[WARNING] GEMINI_API_KEY not configured. AI features will use fallback mode.")
+    print(f"[WARNING] GEMINI_API_KEY not found or invalid. Got: '{api_key}'")
 
 # Models to try in order (fallback chain)
 MODEL_CHAIN = ["gemini-2.0-flash-lite", "gemini-2.0-flash"]
