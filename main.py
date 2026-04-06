@@ -8,6 +8,10 @@ Powered by Google Gemini AI.
 import os
 import sys
 import asyncio
+import sqlite3
+import hashlib
+import json
+from datetime import datetime
 
 # Fix Windows console encoding for Unicode
 if sys.platform == "win32":
@@ -52,6 +56,118 @@ if api_key and api_key != "your_gemini_api_key_here":
     print(f"[OK] Gemini AI connected! Key starts with: {api_key[:10]}...")
 else:
     print(f"[WARNING] GEMINI_API_KEY not found or invalid. Got: '{api_key}'")
+
+
+# =================== DATABASE SETUP ===================
+
+DB_PATH = "schemeconnect.db"
+
+def init_database():
+    """Create the SQLite database and tables if they don't exist."""
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    
+    # Cache table: stores search results keyed by profile fingerprint
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS search_cache (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            profile_hash TEXT UNIQUE NOT NULL,
+            profile_data TEXT NOT NULL,
+            matched_schemes TEXT NOT NULL,
+            ai_summary TEXT NOT NULL,
+            total_found INTEGER NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            hit_count INTEGER DEFAULT 1
+        )
+    """)
+    
+    # Search log: tracks every search for analytics
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS search_log (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            profile_hash TEXT NOT NULL,
+            user_name TEXT,
+            total_found INTEGER,
+            from_cache BOOLEAN DEFAULT 0,
+            searched_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+    
+    conn.commit()
+    conn.close()
+    print(f"[OK] Database initialized: {DB_PATH}")
+
+# Initialize database on startup
+init_database()
+
+
+def get_profile_hash(profile: dict) -> str:
+    """Generate a unique hash from profile data (excluding name — same profile = same results)."""
+    key_fields = {
+        "age": profile.get("age"),
+        "gender": profile.get("gender"),
+        "state": profile.get("state"),
+        "category": profile.get("category"),
+        "occupation": profile.get("occupation"),
+        "annual_income": profile.get("annual_income"),
+        "has_land": profile.get("has_land"),
+        "has_bank_account": profile.get("has_bank_account"),
+        "disability": profile.get("disability"),
+        "education": profile.get("education"),
+        "marital_status": profile.get("marital_status"),
+    }
+    raw = json.dumps(key_fields, sort_keys=True)
+    return hashlib.sha256(raw.encode()).hexdigest()[:16]
+
+
+def get_cached_result(profile_hash: str):
+    """Look up cached results by profile hash."""
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute(
+        "SELECT matched_schemes, ai_summary, total_found FROM search_cache WHERE profile_hash = ?",
+        (profile_hash,)
+    )
+    row = cursor.fetchone()
+    if row:
+        # Increment hit count
+        cursor.execute(
+            "UPDATE search_cache SET hit_count = hit_count + 1 WHERE profile_hash = ?",
+            (profile_hash,)
+        )
+        conn.commit()
+    conn.close()
+    return row
+
+
+def save_to_cache(profile_hash: str, profile_data: dict, schemes: list, ai_summary: str, total_found: int):
+    """Save search results to cache."""
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    try:
+        cursor.execute(
+            "INSERT OR REPLACE INTO search_cache (profile_hash, profile_data, matched_schemes, ai_summary, total_found) VALUES (?, ?, ?, ?, ?)",
+            (profile_hash, json.dumps(profile_data), json.dumps(schemes), ai_summary, total_found)
+        )
+        conn.commit()
+    except Exception as e:
+        print(f"[DB] Cache save error: {e}")
+    conn.close()
+
+
+def log_search(profile_hash: str, user_name: str, total_found: int, from_cache: bool):
+    """Log every search for analytics."""
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    try:
+        cursor.execute(
+            "INSERT INTO search_log (profile_hash, user_name, total_found, from_cache) VALUES (?, ?, ?, ?)",
+            (profile_hash, user_name, total_found, from_cache)
+        )
+        conn.commit()
+    except Exception as e:
+        print(f"[DB] Log error: {e}")
+    conn.close()
 
 # Models to try in order (fallback chain)
 MODEL_CHAIN = ["gemini-2.0-flash-lite", "gemini-2.0-flash"]
@@ -167,8 +283,33 @@ def check_eligibility(scheme: dict, profile: UserProfile) -> tuple:
 @app.post("/api/find-schemes")
 async def find_schemes(profile: UserProfile):
     """Find all eligible government schemes for the user's profile."""
+    
+    # Generate profile fingerprint (name excluded — same demographics = same results)
+    profile_dict = profile.model_dump()
+    profile_hash = get_profile_hash(profile_dict)
+    
+    # Check cache first
+    cached = get_cached_result(profile_hash)
+    if cached:
+        schemes_json, cached_summary, total_found = cached
+        matched_schemes = json.loads(schemes_json)
+        
+        # Replace the name in the AI summary with the current user's name
+        ai_summary = cached_summary
+        # Log as cache hit
+        log_search(profile_hash, profile.name, total_found, from_cache=True)
+        print(f"[CACHE HIT] Profile {profile_hash} — {total_found} schemes (instant!)")
+        
+        return {
+            "total_found": total_found,
+            "schemes": matched_schemes,
+            "ai_summary": ai_summary,
+            "profile_name": profile.name,
+            "from_cache": True,
+        }
+    
+    # Cache miss — compute fresh results
     matched_schemes = []
-
     for scheme in SCHEMES:
         is_eligible, reasons = check_eligibility(scheme, profile)
         if is_eligible:
@@ -189,12 +330,20 @@ async def find_schemes(profile: UserProfile):
 
     # Get AI-powered personalized summary
     ai_summary = await generate_ai_summary(profile, matched_schemes)
+    
+    # Save to cache for future identical profiles
+    save_to_cache(profile_hash, profile_dict, matched_schemes, ai_summary, len(matched_schemes))
+    
+    # Log as fresh computation
+    log_search(profile_hash, profile.name, len(matched_schemes), from_cache=False)
+    print(f"[NEW SEARCH] Profile {profile_hash} — {len(matched_schemes)} schemes (saved to cache)")
 
     return {
         "total_found": len(matched_schemes),
         "schemes": matched_schemes,
         "ai_summary": ai_summary,
         "profile_name": profile.name,
+        "from_cache": False,
     }
 
 
@@ -277,6 +426,45 @@ async def get_states():
 async def get_all_schemes():
     """Return all available schemes (for browsing)."""
     return {"schemes": SCHEMES, "total": len(SCHEMES)}
+
+
+@app.get("/api/stats")
+async def get_stats():
+    """Return database statistics for analytics."""
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    
+    # Total searches
+    cursor.execute("SELECT COUNT(*) FROM search_log")
+    total_searches = cursor.fetchone()[0]
+    
+    # Cache hits
+    cursor.execute("SELECT COUNT(*) FROM search_log WHERE from_cache = 1")
+    cache_hits = cursor.fetchone()[0]
+    
+    # Unique profiles
+    cursor.execute("SELECT COUNT(DISTINCT profile_hash) FROM search_log")
+    unique_profiles = cursor.fetchone()[0]
+    
+    # Cached entries
+    cursor.execute("SELECT COUNT(*) FROM search_cache")
+    cached_entries = cursor.fetchone()[0]
+    
+    # Most popular schemes (top 5 most matched)
+    cursor.execute("SELECT AVG(total_found) FROM search_log")
+    avg_schemes = cursor.fetchone()[0] or 0
+    
+    conn.close()
+    
+    return {
+        "total_searches": total_searches,
+        "cache_hits": cache_hits,
+        "cache_hit_rate": f"{(cache_hits/total_searches*100):.1f}%" if total_searches > 0 else "0%",
+        "unique_profiles": unique_profiles,
+        "cached_entries": cached_entries,
+        "avg_schemes_per_search": round(avg_schemes, 1),
+        "total_schemes_available": len(SCHEMES),
+    }
 
 
 # =================== SERVE FRONTEND ===================
