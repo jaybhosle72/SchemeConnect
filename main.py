@@ -427,8 +427,6 @@ async def get_all_schemes():
     """Return all available schemes (for browsing)."""
     return {"schemes": SCHEMES, "total": len(SCHEMES)}
 
-
-<<<<<<< HEAD
 @app.get("/api/stats")
 async def get_stats():
     """Return database statistics for analytics."""
