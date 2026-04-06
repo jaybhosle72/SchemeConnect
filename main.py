@@ -279,7 +279,7 @@ async def get_all_schemes():
     return {"schemes": SCHEMES, "total": len(SCHEMES)}
 
 
-# =================== SERVE FRONTEND ===================
+# =================== SERVE FRONTEND ==================
 
 @app.get("/")
 async def serve_index():
