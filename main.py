@@ -428,6 +428,7 @@ async def get_all_schemes():
     return {"schemes": SCHEMES, "total": len(SCHEMES)}
 
 
+<<<<<<< HEAD
 @app.get("/api/stats")
 async def get_stats():
     """Return database statistics for analytics."""
@@ -465,7 +466,6 @@ async def get_stats():
         "avg_schemes_per_search": round(avg_schemes, 1),
         "total_schemes_available": len(SCHEMES),
     }
-
 
 # =================== SERVE FRONTEND ===================
 
